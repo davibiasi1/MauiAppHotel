@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiAppHotel.Views.Sobre"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Sobre"
+    BackgroundColor="{StaticResource Gray100}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+
+            <Label Text="Sobre o Aplicativo"
+                   FontAttributes="Bold"
+                   FontSize="28"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center" />
+
+            <Frame Padding="20"
+                   CornerRadius="16"
+                   HasShadow="True"
+                   BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Este aplicativo foi desenvolvido para auxiliar no cálculo e na organização de reservas de hospedagem."
+                           LineBreakMode="WordWrap"
+                           FontSize="14"
+                           TextColor="Black"/>
+
+                    <Label Text="Versão 1.0"
+                           FontAttributes="Italic"
+                           FontSize="14"
+                           TextColor="Gray" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="20"
+                   CornerRadius="16"
+                   HasShadow="True"
+                   BackgroundColor="White">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Desenvolvido por Davi Biasi"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="Ano de desenvolvimento: 2025"
+                           TextColor="Black"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Voltar"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    Clicked="OnVoltarClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
