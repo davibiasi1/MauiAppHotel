@@ -5,9 +5,21 @@ namespace MauiAppHotel.Views
 {
     public partial class ContatacaoHospedagem : ContentPage
     {
+        App PropriedadesApp;
+
         public ContatacaoHospedagem()
         {
             InitializeComponent();
+
+            PropriedadesApp = (App)Application.Current;
+
+            pck_quarto.ItemsSource = PropriedadesApp.lista_quartos;
+
+            dtpck_checkin.MinimumDate = DateTime.Now;
+            dtpck_checkin.MaximumDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, DateTime.Now.Day);
+
+            dtpck_checkout.MinimumDate = dtpck_checkin.Date.AddDays(1);
+            dtpck_checkout.MaximumDate = dtpck_checkin.Date.AddMonths(6);
         }
 
         private async void OnSobreClicked(object sender, EventArgs e)
@@ -17,21 +29,26 @@ namespace MauiAppHotel.Views
 
         private async void OnAvancarClicked(object sender, EventArgs e)
         {
-            // Aqui você pode validar dados e navegar para a próxima etapa (ex.: Resumo/Confirmação)
-            // Exemplo simples:
-            if (pck_quarto.SelectedIndex < 0)
+            try
             {
-                await DisplayAlert("Ops", "Selecione uma acomodação.", "OK");
-                return;
-            }
-            if (dtpck_checkout.Date <= dtpck_checkin.Date)
-            {
-                await DisplayAlert("Ops", "O check-out deve ser após o check-in.", "OK");
-                return;
-            }
+                Navigation.PushAsync(new HospedagemContratada());
 
-            await DisplayAlert("Tudo certo!", "Dados validados. Próxima etapa…", "OK");
-            // Ex.: await Shell.Current.GoToAsync("resumo");
+            } catch (Exception ex)
+            {
+
+                DisplayAlert("Ops", ex.Message, "OK");
+            }
+           
+        }
+
+        private void dtpck_checkin_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            DatePicker elemento = sender as DatePicker;
+
+            DateTime data_selecionada = elemento.Date;
+
+            dtpck_checkout.MinimumDate = data_selecionada.AddDays(1);
+            dtpck_checkout.MaximumDate = data_selecionada.AddMonths(6);
         }
     }
 }
